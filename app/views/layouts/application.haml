@@ -1,0 +1,11 @@
+!!!
+%html{lang: "en-US"}
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title Slack Clone
+    = stylesheet_link_tag '/assets/application'
+    = javascript_include_tag '/assets/application'
+    = stylesheet_link_tag '/stylesheets/site.css'
+  %body
+    = yield
+

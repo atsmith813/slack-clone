@@ -6,6 +6,8 @@ module SlackClone
     register Padrino::Helpers
     enable :sessions
     register Padrino::WebSockets
+    register Padrino::Sprockets
+	  sprockets :minify => (Padrino.env == :production)
 
 		websocket :channel do
 			on :ping do |message|
