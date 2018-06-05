@@ -3,6 +3,11 @@ source 'https://rubygems.org'
 # Padrino supports Ruby version 2.2.2 and later
 # ruby '2.4.1'
 
+gem 'padrino-websockets'
+gem 'faye-websocket'
+gem 'puma'
+gem 'pry'
+
 # Distribute your app as a gem
 # gemspec
 
@@ -11,7 +16,7 @@ source 'https://rubygems.org'
 # gem 'trinidad', :platform => 'jruby'
 
 # Optional JSON codec (faster performance)
-# gem 'oj'
+gem 'oj'
 
 # Project requirements
 gem 'rake'

@@ -5,6 +5,18 @@ module SlackClone
     register Padrino::Mailer
     register Padrino::Helpers
     enable :sessions
+    register Padrino::WebSockets
+
+		websocket :channel do
+			on :ping do |message|
+				send_message(:channel, session['websocket_user'], {pong: true, data: message})
+				broadcast(:channel, {pong: true, data: message, broadcast: true})
+			end
+		end
+
+    get '/' do
+      'Hello World'
+		end
 
     ##
     # Caching support.
