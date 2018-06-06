@@ -7,3 +7,4 @@
 :stylesheet: scss
 :namespace: SlackClone
 :migration_format: number
+:admin_renderer: haml

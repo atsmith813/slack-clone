@@ -24,6 +24,8 @@ gem 'oj'
 gem 'rake'
 
 # Component requirements
+gem 'activesupport', '>= 3.1'
+gem 'bcrypt'
 gem 'sass'
 gem 'haml'
 gem 'activerecord', '>= 3.1', require: 'active_record'
@@ -34,10 +36,10 @@ gem 'rspec', group: 'test'
 gem 'rack-test', require: 'rack/test', group: 'test'
 
 # Padrino Stable Gem
-gem 'padrino', '0.14.3'
+#gem 'padrino', '0.14.3'
 
 # Or Padrino Edge
-# gem 'padrino', :github => 'padrino/padrino-framework'
+gem 'padrino', github: 'padrino/padrino-framework'
 
 # Or Individual Gems
 # %w(core support gen helpers cache mailer admin).each do |g|
