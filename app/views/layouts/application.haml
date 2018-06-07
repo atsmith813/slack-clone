@@ -1,11 +1,11 @@
 !!!
-%html{lang: "en-US"}
+%html{lang: 'en-US'}
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
     %title Slack Clone
+    %script{src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'}
     = stylesheet_link_tag '/assets/application'
     = javascript_include_tag '/assets/application'
-    = stylesheet_link_tag '/stylesheets/site.css'
   %body
     = yield
 

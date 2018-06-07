@@ -17,7 +17,7 @@ module SlackClone
 		end
 
     get '/' do
-      'Hello World'
+      render 'home/index'
 		end
 
     ##
