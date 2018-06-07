@@ -56,9 +56,9 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _submit_btn = __webpack_require__(159);
+	var _choose_screen_name = __webpack_require__(159);
 
-	var _submit_btn2 = _interopRequireDefault(_submit_btn);
+	var _choose_screen_name2 = _interopRequireDefault(_choose_screen_name);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80,20 +80,7 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'jumbotron' },
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'React is working!'
-	          )
-	        ),
-	        _react2.default.createElement(_submit_btn2.default, { submit_text: 'TESTING!' })
-	      );
+	      return _react2.default.createElement(_choose_screen_name2.default, null);
 	    }
 	  }]);
 
@@ -19804,7 +19791,54 @@
 /* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _submit_btn = __webpack_require__(160);
+
+	var _submit_btn2 = _interopRequireDefault(_submit_btn);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ChooseScreenName = function ChooseScreenName() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container w-100 h-100' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'row align-items-center h-100' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'text-center col-12 col-md-4 offset-md-4' },
+	        _react2.default.createElement(
+	          'form',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', { type: 'text', className: 'text-center form-control form-control-lg', id: 'selectScreenName', placeholder: 'Enter your screen name here!' })
+	          ),
+	          _react2.default.createElement(_submit_btn2.default, { btn_text: 'Connect' })
+	        )
+	      )
+	    )
+	  );
+	};
+
+	exports.default = ChooseScreenName;
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -19817,10 +19851,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SubmitBtn = function SubmitBtn(props) {
+	  var btn_text = props.btn_text || 'Submit';
 	  return _react2.default.createElement(
-	    "button",
-	    { className: "btn btn-success" },
-	    props.submit_text
+	    'button',
+	    { type: 'submit', className: 'btn btn-primary btn-lg w-100', role: 'button' },
+	    btn_text
 	  );
 	};
 
