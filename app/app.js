@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
+import SubmitBtn from './components/submit_btn';
 
 class App extends Component {
 
@@ -9,8 +10,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="jumbotron">
-        <h1>React is working!</h1>
+      <div>
+        <div className="jumbotron">
+          <h1>React is working!</h1>
+        </div>
+        <SubmitBtn submit_text='TESTING!' />
       </div>
     );
   }

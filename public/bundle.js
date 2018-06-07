@@ -56,6 +56,10 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _submit_btn = __webpack_require__(159);
+
+	var _submit_btn2 = _interopRequireDefault(_submit_btn);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -78,12 +82,17 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'jumbotron' },
+	        null,
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'React is working!'
-	        )
+	          'div',
+	          { className: 'jumbotron' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'React is working!'
+	          )
+	        ),
+	        _react2.default.createElement(_submit_btn2.default, { submit_text: 'TESTING!' })
 	      );
 	    }
 	  }]);
@@ -19790,6 +19799,32 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var SubmitBtn = function SubmitBtn(props) {
+	  return _react2.default.createElement(
+	    "button",
+	    { className: "btn btn-success" },
+	    props.submit_text
+	  );
+	};
+
+	exports.default = SubmitBtn;
 
 /***/ })
 /******/ ]);
