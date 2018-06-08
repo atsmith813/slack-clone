@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import ChooseScreenName from './components/choose_screen_name';
+import Chats from './components/chats';
 
 class App extends Component {
 
@@ -10,7 +10,7 @@ class App extends Component {
 
   render() {
     return (
-      <ChooseScreenName />
+      <Chats />
     );
   }
 
