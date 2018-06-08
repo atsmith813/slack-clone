@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import ChannelList from './channel_list';
 import ChatBox from './chat_box';
 import MessageFeed from './message_feed';
@@ -16,47 +17,18 @@ class Chats extends Component {
   }
 
   componentDidMount() {
-    // API call to get list of channels from server and then update the state
-    // a loop to build this test array was just not working ¯\_(ツ)_/¯
-    const channels = [
-      'channel_1',
-      'channel_2',
-      'channel_3',
-      'channel_4',
-      'channel_5',
-      'channel_6',
-      'channel_7',
-      'channel_8',
-      'channel_9',
-      'channel_10',
-      'channel_11',
-      'channel_12',
-      'channel_13',
-      'channel_14',
-      'channel_15',
-      'channel_16',
-      'channel_17',
-      'channel_18',
-      'channel_19',
-      'channel_20',
-      'channel_21',
-      'channel_22',
-      'channel_23',
-      'channel_24',
-      'channel_25',
-      'channel_26',
-      'channel_27',
-      'channel_28',
-      'channel_29',
-      'channel_30',
-      'channel_31',
-      'channel_32',
-      'channel_33'
-    ];
-    this.setState({
-      channels: channels,
-      activeChannel: channels[0]
-    });
+    axios.get('/channel')
+      .then((response) => {
+        console.log(response);
+        const channels = response.data;
+        this.setState({
+          channels: channels,
+          activeChannel: channels[0]
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {

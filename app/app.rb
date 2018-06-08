@@ -16,6 +16,14 @@ module SlackClone
 			end
 		end
 
+    # format/parse JSON post requests so that params are more accessible
+    before do
+      if request.request_method == "POST"
+        body_parameters = request.body.read
+        params.merge!(JSON.parse(body_parameters))
+      end
+    end
+
     get '/' do
       render 'home/index'
 		end
