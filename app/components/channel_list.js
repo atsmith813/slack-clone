@@ -11,8 +11,9 @@ const ChannelList = (props) => {
         activeChannel= { props.activeChannel } />
     );
   });
+
   return (
-    <ul className="col-md-4 list-group">
+    <ul className="list-group scrollable h-100">
       { channelItems }
     </ul>
   );

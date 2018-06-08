@@ -19807,6 +19807,14 @@
 
 	var _channel_list2 = _interopRequireDefault(_channel_list);
 
+	var _chat_box = __webpack_require__(162);
+
+	var _chat_box2 = _interopRequireDefault(_chat_box);
+
+	var _message_feed = __webpack_require__(163);
+
+	var _message_feed2 = _interopRequireDefault(_message_feed);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19835,7 +19843,8 @@
 	  _createClass(Chats, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var channels = ['channel_1', 'channel_2', 'channel_3'];
+	      // API call to get list of channels from server and then update the state
+	      var channels = ['channel_11111111111111111111111111111111111111111111111111111111111', 'channel_2', 'channel_3', 'channel_4', 'channel_5', 'channel_6', 'channel_7', 'channel_8', 'channel_9', 'channel_10', 'channel_11', 'channel_12', 'channel_13', 'channel_14', 'channel_15', 'channel_16', 'channel_17', 'channel_18', 'channel_19', 'channel_20', 'channel_21', 'channel_22', 'channel_23', 'channel_24', 'channel_25', 'channel_26', 'channel_27', 'channel_28', 'channel_29', 'channel_30', 'channel_31', 'channel_32', 'channel_33'];
 	      this.setState({
 	        channels: channels,
 	        activeChannel: channels[0]
@@ -19848,13 +19857,23 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(_channel_list2.default, {
-	          onChannelSelect: function onChannelSelect(activeChannel) {
-	            return _this2.setState({ activeChannel: activeChannel });
-	          },
-	          channels: this.state.channels,
-	          activeChannel: this.state.activeChannel })
+	        { className: 'chat row h-100 w-100' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-3 h-100 scrollable' },
+	          _react2.default.createElement(_channel_list2.default, {
+	            onChannelSelect: function onChannelSelect(activeChannel) {
+	              return _this2.setState({ activeChannel: activeChannel });
+	            },
+	            channels: this.state.channels,
+	            activeChannel: this.state.activeChannel })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-md-9 w-100 h-100' },
+	          _react2.default.createElement(_message_feed2.default, null),
+	          _react2.default.createElement(_chat_box2.default, null)
+	        )
 	      );
 	    }
 	  }]);
@@ -19892,9 +19911,10 @@
 	      channel: channel,
 	      activeChannel: props.activeChannel });
 	  });
+
 	  return _react2.default.createElement(
 	    'ul',
-	    { className: 'col-md-4 list-group' },
+	    { className: 'list-group scrollable h-100' },
 	    channelItems
 	  );
 	};
@@ -19935,6 +19955,180 @@
 	};
 
 	exports.default = ChannelListItem;
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ChatBox = function (_Component) {
+	  _inherits(ChatBox, _Component);
+
+	  function ChatBox(props) {
+	    _classCallCheck(this, ChatBox);
+
+	    var _this = _possibleConstructorReturn(this, (ChatBox.__proto__ || Object.getPrototypeOf(ChatBox)).call(this, props));
+
+	    _this.state = { message_length: 0 };
+	    return _this;
+	  }
+
+	  _createClass(ChatBox, [{
+	    key: "onInputChange",
+	    value: function onInputChange(e) {
+	      this.setState({ message_length: e.target.value.length });
+	    }
+	  }, {
+	    key: "onEnterPress",
+	    value: function onEnterPress(e) {
+	      if (e.keyCode == 13 && e.shiftKey == false) {
+	        e.preventDefault();
+	        // trigger message send via websocket
+	        // clear message box if successful
+	        // check that state.message_length changed to 0 after success
+	        console.log("ENTER PRESSED!");
+	      }
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "w-100 chat-box" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "form-group" },
+	          _react2.default.createElement("input", {
+	            type: "text",
+	            className: "form-control form-control-lg",
+	            placeholder: "Type your message here and press 'Enter'",
+	            value: this.state.message,
+	            onKeyDown: this.onEnterPress,
+	            onChange: function onChange(e) {
+	              return _this2.onInputChange(e);
+	            } }),
+	          _react2.default.createElement(
+	            "small",
+	            {
+	              id: "character-counter",
+	              className: "form-text text-muted" },
+	            this.state.message_length + " / 255 characters"
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ChatBox;
+	}(_react.Component);
+
+	exports.default = ChatBox;
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MessageFeed = function (_Component) {
+	  _inherits(MessageFeed, _Component);
+
+	  function MessageFeed(props) {
+	    _classCallCheck(this, MessageFeed);
+
+	    var _this = _possibleConstructorReturn(this, (MessageFeed.__proto__ || Object.getPrototypeOf(MessageFeed)).call(this, props));
+
+	    _this.state = {
+	      new_message: false,
+	      messages: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(MessageFeed, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      this.connection = new WebSocket('ws://localhost:3000/channel');
+
+	      this.connection.onopen = function (message) {
+	        console.log('connected to channel');
+	        _this2.connection.send(JSON.stringify({ event: 'ping', some: 'data' }));
+	      };
+
+	      this.connection.onmessage = function (message) {
+	        console.log('message', JSON.parse(message.data));
+	      };
+
+	      // this is an "echo" websocket service for testing pusposes
+	      //this.connection = new WebSocket('wss://echo.websocket.org');
+
+	      // listen to onmessage event
+	      //this.connection.onmessage = evt => {
+	      //// add the new message to state
+	      //this.setState({
+	      //messages : this.state.messages.concat([ evt.data ])
+	      //})
+	      //}
+
+	      // for testing: sending a message to the echo service every 2 seconds,
+	      // the service sends it right back
+	      //setInterval( _ =>{
+	      //this.connection.send( Math.random() )
+	      //}, 2000 )
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      return _react2.default.createElement('div', { className: 'w-100 message-feed scrollable' });
+	    }
+	  }]);
+
+	  return MessageFeed;
+	}(_react.Component);
+
+	exports.default = MessageFeed;
 
 /***/ })
 /******/ ]);
