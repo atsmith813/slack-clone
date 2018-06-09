@@ -19839,7 +19839,8 @@
 	      channels: [],
 	      activeUser: 'test_user',
 	      //activeUser: sessionStorage.getItem('screenName', data),
-	      activeChannel: ''
+	      activeChannel: '',
+	      messages: []
 	    };
 	    return _this;
 	  }
@@ -19849,13 +19850,40 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      _axios2.default.get('/channel').then(function (response) {
-	        console.log(response);
+	      _axios2.default.get('/channels').then(function (response) {
 	        var channels = response.data;
 	        _this2.setState({
 	          channels: channels,
 	          activeChannel: channels[0]
 	        });
+	        _this2.getMessages(channels[0]);
+	      }).catch(function (error) {
+	        //console.log(error);
+	      });
+
+	      this.connection = new WebSocket('ws://localhost:3000/channel');
+	      this.connection.onopen = function (message) {
+	        //console.log('connected to channel');
+	        _this2.connection.send(JSON.stringify({ event: 'ping', some: 'data' }));
+	      };
+	      this.connection.onmessage = function (message) {
+	        //console.log('message', JSON.parse(message.data));
+	      };
+	    }
+	  }, {
+	    key: 'onChannelSelect',
+	    value: function onChannelSelect(activeChannel) {
+	      this.setState({ activeChannel: activeChannel });
+	      this.getMessages(activeChannel);
+	    }
+	  }, {
+	    key: 'getMessages',
+	    value: function getMessages(activeChannel) {
+	      var _this3 = this;
+
+	      _axios2.default.get('/messages/' + activeChannel).then(function (response) {
+	        console.log(response);
+	        _this3.setState({ messages: response.data });
 	      }).catch(function (error) {
 	        console.log(error);
 	      });
@@ -19863,7 +19891,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
+	      var _this4 = this;
 
 	      return _react2.default.createElement(
 	        'div',
@@ -19873,7 +19901,7 @@
 	          { className: 'col-md-3 h-100 scrollable' },
 	          _react2.default.createElement(_channel_list2.default, {
 	            onChannelSelect: function onChannelSelect(activeChannel) {
-	              return _this3.setState({ activeChannel: activeChannel });
+	              return _this4.onChannelSelect(activeChannel);
 	            },
 	            channels: this.state.channels,
 	            activeChannel: this.state.activeChannel })
@@ -19881,7 +19909,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-md-9 w-100 h-100' },
-	          _react2.default.createElement(_message_feed2.default, null),
+	          _react2.default.createElement(_message_feed2.default, { messages: this.state.messages }),
 	          _react2.default.createElement(_chat_box2.default, null)
 	        )
 	      );
@@ -21606,13 +21634,11 @@
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -21620,70 +21646,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var MessageFeed = function (_Component) {
-	  _inherits(MessageFeed, _Component);
-
-	  function MessageFeed(props) {
-	    _classCallCheck(this, MessageFeed);
-
-	    var _this = _possibleConstructorReturn(this, (MessageFeed.__proto__ || Object.getPrototypeOf(MessageFeed)).call(this, props));
-
-	    _this.state = {
-	      new_message: false,
-	      messages: []
-	    };
-	    return _this;
-	  }
-
-	  _createClass(MessageFeed, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      this.connection = new WebSocket('ws://localhost:3000/channel');
-
-	      this.connection.onopen = function (message) {
-	        console.log('connected to channel');
-	        _this2.connection.send(JSON.stringify({ event: 'ping', some: 'data' }));
-	      };
-
-	      this.connection.onmessage = function (message) {
-	        console.log('message', JSON.parse(message.data));
-	      };
-
-	      // this is an "echo" websocket service for testing pusposes
-	      //this.connection = new WebSocket('wss://echo.websocket.org');
-
-	      // listen to onmessage event
-	      //this.connection.onmessage = evt => {
-	      //// add the new message to state
-	      //this.setState({
-	      //messages : this.state.messages.concat([ evt.data ])
-	      //})
-	      //}
-
-	      // for testing: sending a message to the echo service every 2 seconds,
-	      // the service sends it right back
-	      //setInterval( _ =>{
-	      //this.connection.send( Math.random() )
-	      //}, 2000 )
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-
-	      return _react2.default.createElement('div', { className: 'w-100 message-feed scrollable' });
-	    }
-	  }]);
-
-	  return MessageFeed;
-	}(_react.Component);
+	var MessageFeed = function MessageFeed(props) {
+	  return _react2.default.createElement("div", { className: "w-100 message-feed scrollable" });
+	};
 
 	exports.default = MessageFeed;
 

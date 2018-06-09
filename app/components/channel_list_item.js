@@ -6,7 +6,6 @@ const ChannelListItem = ({ channel, activeChannel, onChannelSelect }) => {
     <li
       onClick={ () => onChannelSelect(channel) }
       className={ "list-group-item " + isActiveChannel } >
-
       { '#' + channel }
     </li>
   );
