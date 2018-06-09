@@ -49,7 +49,6 @@ class Chats extends Component {
   getMessages(activeChannel) {
     axios.get('/messages/' + activeChannel)
       .then((response) => {
-        console.log(response);
         this.setState({ messages: response.data });
       })
       .catch((error) => {
@@ -66,8 +65,10 @@ class Chats extends Component {
             channels={ this.state.channels }
             activeChannel={ this.state.activeChannel } />
         </div>
-        <div className="col-md-9 w-100 h-100">
-          <MessageFeed messages={ this.state.messages }/>
+        <div className="col-md-9 h-100">
+          <div className="w-100 h-100 scrollable">
+            <MessageFeed messages={ this.state.messages } />
+          </div>
           <ChatBox />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChannelListItem = ({ channel, activeChannel, onChannelSelect }) => {
+const Channel = ({ channel, activeChannel, onChannelSelect }) => {
   const isActiveChannel = channel == activeChannel ? "active" : null;
   return (
     <li
@@ -11,5 +11,5 @@ const ChannelListItem = ({ channel, activeChannel, onChannelSelect }) => {
   );
 }
 
-export default ChannelListItem;
+export default Channel;
 

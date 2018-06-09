@@ -19882,7 +19882,6 @@
 	      var _this3 = this;
 
 	      _axios2.default.get('/messages/' + activeChannel).then(function (response) {
-	        console.log(response);
 	        _this3.setState({ messages: response.data });
 	      }).catch(function (error) {
 	        console.log(error);
@@ -19908,8 +19907,12 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col-md-9 w-100 h-100' },
-	          _react2.default.createElement(_message_feed2.default, { messages: this.state.messages }),
+	          { className: 'col-md-9 h-100' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'w-100 h-100 scrollable' },
+	            _react2.default.createElement(_message_feed2.default, { messages: this.state.messages })
+	          ),
 	          _react2.default.createElement(_chat_box2.default, null)
 	        )
 	      );
@@ -21482,15 +21485,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _channel_list_item = __webpack_require__(187);
+	var _channel = __webpack_require__(187);
 
-	var _channel_list_item2 = _interopRequireDefault(_channel_list_item);
+	var _channel2 = _interopRequireDefault(_channel);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var ChannelList = function ChannelList(props) {
-	  var channelItems = props.channels.map(function (channel) {
-	    return _react2.default.createElement(_channel_list_item2.default, {
+	  var channels = props.channels.map(function (channel) {
+	    return _react2.default.createElement(_channel2.default, {
 	      onChannelSelect: props.onChannelSelect,
 	      key: channel,
 	      channel: channel,
@@ -21498,9 +21501,18 @@
 	  });
 
 	  return _react2.default.createElement(
-	    'ul',
-	    { className: 'list-group scrollable h-100' },
-	    channelItems
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      'Channels'
+	    ),
+	    _react2.default.createElement(
+	      'ul',
+	      { className: 'list-group scrollable h-100' },
+	      channels
+	    )
 	  );
 	};
 
@@ -21522,7 +21534,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ChannelListItem = function ChannelListItem(_ref) {
+	var Channel = function Channel(_ref) {
 	  var channel = _ref.channel,
 	      activeChannel = _ref.activeChannel,
 	      onChannelSelect = _ref.onChannelSelect;
@@ -21539,7 +21551,7 @@
 	  );
 	};
 
-	exports.default = ChannelListItem;
+	exports.default = Channel;
 
 /***/ }),
 /* 188 */
@@ -21634,6 +21646,43 @@
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _message = __webpack_require__(190);
+
+	var _message2 = _interopRequireDefault(_message);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MessageFeed = function MessageFeed(props) {
+	  var messages_array = Array.from(props.messages);
+	  var formatted_messages = messages_array.map(function (message, index) {
+	    return _react2.default.createElement(_message2.default, {
+	      message: message,
+	      key: 'message_' + index });
+	  });
+
+	  return _react2.default.createElement(
+	    'ul',
+	    { className: 'list-group message-feed scrollable' },
+	    formatted_messages
+	  );
+	};
+
+	exports.default = MessageFeed;
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -21646,11 +21695,28 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var MessageFeed = function MessageFeed(props) {
-	  return _react2.default.createElement("div", { className: "w-100 message-feed scrollable" });
+	var Message = function Message(_ref) {
+	  var message = _ref.message;
+
+	  var screen_name = message[0];
+	  var message_content = message[1];
+	  return _react2.default.createElement(
+	    "li",
+	    { class_name: "list-group-item" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "screen_name d-inline" },
+	      screen_name + ':'
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "message_content d-inline" },
+	      message_content
+	    )
+	  );
 	};
 
-	exports.default = MessageFeed;
+	exports.default = Message;
 
 /***/ })
 /******/ ]);
