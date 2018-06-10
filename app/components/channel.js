@@ -5,7 +5,7 @@ const Channel = ({ channel, activeChannel, onChannelSelect }) => {
   return (
     <li
       onClick={ () => onChannelSelect(channel) }
-      className={ "list-group-item " + isActiveChannel } >
+      className={ "channel list-group-item " + isActiveChannel } >
       { '#' + channel }
     </li>
   );

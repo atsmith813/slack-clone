@@ -1,3 +1,6 @@
+$light-grey-background: #f7f7f9;
+$light-grey-border: rgba(0, 0, 0, 0.125);
+
 #app,
 html,
 body {
@@ -34,7 +37,7 @@ body {
 }
 
 .message-feed {
-  max-height: 90%;
+  max-height: 75%;
   display: flex;
   flex-direction: column-reverse;
 }
@@ -50,5 +53,25 @@ body {
 
 .message-in-feed {
   margin: 1em 5em;
+}
+
+.channel-column {
+  background-color: $light-grey-background;
+  padding: 0;
+  border-right: solid 1px;
+  border-right-color: $light-grey-border;
+}
+
+.channel-title {
+  margin-left: 15px;
+}
+
+.channel-list,
+.channel{
+  background-color: $light-grey-background;
+}
+
+h1 {
+  margin-bottom: 1rem;
 }
 

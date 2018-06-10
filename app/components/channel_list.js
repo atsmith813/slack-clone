@@ -13,7 +13,7 @@ const ChannelList = (props) => {
   });
 
   return (
-    <ul className="list-group scrollable h-100">
+    <ul className="channel-list list-group scrollable h-100">
       { channels }
     </ul>
   );

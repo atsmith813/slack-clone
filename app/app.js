@@ -7,7 +7,8 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { activeUser: sessionStorage.getItem('screenName') };
+    //this.state = { activeUser: sessionStorage.getItem('screenName') };
+    this.state = { activeUser: 'test_user' };
   }
 
   onScreenNameSelect(screenName) {

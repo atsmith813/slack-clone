@@ -3,6 +3,7 @@ import axios from 'axios';
 import ChannelList from './channel_list';
 import ChatBox from './chat_box';
 import MessageFeed from './message_feed';
+import ChannelTitle from './channel_title';
 
 class Chats extends Component {
   constructor(props) {
@@ -72,7 +73,8 @@ class Chats extends Component {
   render() {
     return(
       <div className="chat row h-100 w-100">
-        <div className="col-md-3 h-100 scrollable">
+        <div className="col-md-3 h-100 channel-column">
+          <ChannelTitle />
           <ChannelList
             onChannelSelect={ activeChannel => this.onChannelSelect(activeChannel) }
             channels={ this.state.channels }
@@ -80,6 +82,7 @@ class Chats extends Component {
         </div>
         <div className="col-md-9 h-100">
           <div className="w-100 h-100 scrollable">
+            <h1>{ this.state.activeChannel }</h1>
             <MessageFeed messages={ this.state.messages } />
           </div>
           <ChatBox
