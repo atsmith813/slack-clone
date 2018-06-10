@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'development',
   entry: './app/app.js',
   output: {
     path: __dirname,
