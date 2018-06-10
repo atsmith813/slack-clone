@@ -58,13 +58,22 @@ body {
 .channel-column {
   background-color: $light-grey-background;
   padding: 0;
-  border-right: solid 1px;
+  border-right: solid 1.5px;
   border-right-color: $light-grey-border;
 }
 
+.channel-list {
+  max-height: 90%;
+}
+
 .channel-title {
+  max-height: 10%;
   vertical-align: middle;
   margin-left: 15px;
+}
+
+.active-channel-title {
+  max-height: 10%;
 }
 
 .create-channel-btn {
