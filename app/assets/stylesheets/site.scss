@@ -42,10 +42,6 @@ body {
   flex-direction: column-reverse;
 }
 
-.help_me {
-  max-height: 80%;
-}
-
 .screen_name {
   font-weight: bold;
   margin-right: 1em;
@@ -90,3 +86,8 @@ h1 {
   margin-bottom: 1rem;
 }
 
+@media only screen and (max-height: 640px) {
+  .message-feed {
+    max-height: 60%;
+  }
+}
