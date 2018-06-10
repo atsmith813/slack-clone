@@ -19,7 +19,7 @@ class App extends Component {
     this.addNewChannel = this.addNewChannel.bind(this);
   }
 
-  setDefaultChannel(activeChannel) {
+  setActiveChannel(activeChannel) {
     this.setState({ activeChannel });
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
     } else if (this.state.activeUser) {
       return (
         <Chats
-          setDefaultChannel={ activeChannel => this.setDefaultChannel(activeChannel) }
+          setActiveChannel={ activeChannel => this.setActiveChannel(activeChannel) }
           activeChannel={ this.state.activeChannel }
           activeUser={ this.state.activeUser }
           renderNewChannel={ () => this.renderNewChannel } />

@@ -11,7 +11,6 @@ class Chats extends Component {
 
     this.state = {
       channels: [],
-      activeChannel: '',
       messages: [],
       new_channel: false
     };
@@ -29,7 +28,7 @@ class Chats extends Component {
         });
 
         this.getMessages(activeChannel);
-        this.props.setDefaultChannel(activeChannel);
+        this.props.setActiveChannel(activeChannel);
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +38,7 @@ class Chats extends Component {
     this.connection.onmessage = (message) => {
       const newMessageData = JSON.parse(message.data);
       const newMessageChannel = newMessageData.channel;
-      if (this.state.activeChannel === newMessageChannel) {
+      if (this.props.activeChannel === newMessageChannel) {
         const messages = Array.from(this.state.messages);
         messages.unshift(newMessageData.new_message);
         this.setState({
@@ -55,12 +54,12 @@ class Chats extends Component {
       event: 'new_message',
       content: message_content,
       user: this.props.activeUser,
-      channel: this.state.activeChannel
+      channel: this.props.activeChannel
     }));
   }
 
   onChannelSelect(activeChannel) {
-    this.setState({ activeChannel });
+    this.props.setActiveChannel(activeChannel);
     this.getMessages(activeChannel);
   }
 
