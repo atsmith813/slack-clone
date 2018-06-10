@@ -34,8 +34,15 @@ class Chats extends Component {
 
     this.connection = new WebSocket('ws://localhost:3000/channel');
     this.connection.onmessage = (message) => {
-      // Find chat and add new message
-      console.log('message', JSON.parse(message.data));
+      const newMessageData = JSON.parse(message.data);
+      if (this.state.activeChannel === newMessageData.channel) {
+        const messages = Array.from(this.state.messages);
+        messages.push(newMessageData.new_message);
+        this.setState({
+          messages: messages,
+          activeChannel: newMessageData.channel
+        });
+      }
     }
   }
 

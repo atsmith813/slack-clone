@@ -19864,10 +19864,14 @@
 
 	      this.connection = new WebSocket('ws://localhost:3000/channel');
 	      this.connection.onmessage = function (message) {
-	        // Find chat and add new message
-	        console.log('WTF');
-	        console.log('message', JSON.parse(message.data));
-	        debugger;
+	        var newMessageData = JSON.parse(message.data);
+	        //if (this.state.activeChannel === newMessageData.channel) {
+	        var messages = Array.from(_this2.state.messages);
+	        messages.push(newMessageData.new_message);
+	        _this2.setState({
+	          messages: messages
+	        });
+	        //}
 	      };
 	    }
 	  }, {
