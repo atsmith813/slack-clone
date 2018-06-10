@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SubmitBtn from './submit_btn';
 import PostHeaders from './post_headers';
+import Chats from './chats';
 
 class ChooseScreenName extends Component {
   constructor(props) {
     super(props);
     this.state = { screenName: '' };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleScreenNameChange(e) {
@@ -15,16 +17,13 @@ class ChooseScreenName extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    sessionStorage.setItem('screenName', this.state.screenName);
-    console.log(this.state.screenName);
-
     axios.post('/home', {screenName: this.state.screenName}, PostHeaders)
       .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
+    this.props.onScreenNameSelect(this.state.screenName);
   }
 
   render() {

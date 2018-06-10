@@ -10,8 +10,6 @@ class Chats extends Component {
 
     this.state = {
       channels: [],
-      activeUser: 'test_user',
-      //activeUser: sessionStorage.getItem('screenName', data),
       activeChannel: '',
       messages: []
     };
@@ -51,7 +49,7 @@ class Chats extends Component {
     this.connection.send(JSON.stringify({
       event: 'new_message',
       content: message_content,
-      user: this.state.activeUser,
+      user: this.props.activeUser,
       channel: this.state.activeChannel
     }));
   }
