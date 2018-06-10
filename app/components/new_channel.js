@@ -17,9 +17,9 @@ class NewChannel extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios.post('/channels', { newChannel: this.state.newChannel}, PostHeaders)
-      .then(function (response) {
+      .then( (response) => {
         this.props.addNewChannel(this.state.newChannel);
-      }.bind(this))
+      })
       .catch(function (error) {
         console.log(error);
       });
