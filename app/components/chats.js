@@ -22,11 +22,14 @@ class Chats extends Component {
     axios.get('/channels')
       .then((response) => {
         const channels = response.data;
+        const activeChannel = this.props.activeChannel || channels[0]
         this.setState({
           channels: channels,
-          activeChannel: channels[0]
+          activeChannel: activeChannel
         });
-        this.getMessages(channels[0]);
+
+        this.getMessages(activeChannel);
+        this.props.setDefaultChannel(activeChannel);
       })
       .catch((error) => {
         console.log(error);
@@ -79,11 +82,11 @@ class Chats extends Component {
           <ChannelList
             onChannelSelect={ activeChannel => this.onChannelSelect(activeChannel) }
             channels={ this.state.channels }
-            activeChannel={ this.state.activeChannel } />
+            activeChannel={ this.props.activeChannel } />
         </div>
         <div className="col-md-9 h-100">
           <div className="w-100 h-100 scrollable">
-            <h1>{ this.state.activeChannel }</h1>
+            <h1>{ this.props.activeChannel }</h1>
             <MessageFeed messages={ this.state.messages } />
           </div>
           <ChatBox onMessageSend={ e => this.onMessageSend(e) } />

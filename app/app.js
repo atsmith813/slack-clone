@@ -19,6 +19,10 @@ class App extends Component {
     this.addNewChannel = this.addNewChannel.bind(this);
   }
 
+  setDefaultChannel(activeChannel) {
+    this.setState({ activeChannel });
+  }
+
   onScreenNameSelect(screenName) {
     this.setState({ activeUser: screenName });
   }
@@ -44,6 +48,8 @@ class App extends Component {
     } else if (this.state.activeUser) {
       return (
         <Chats
+          setDefaultChannel={ activeChannel => this.setDefaultChannel(activeChannel) }
+          activeChannel={ this.state.activeChannel }
           activeUser={ this.state.activeUser }
           renderNewChannel={ () => this.renderNewChannel } />
       )
