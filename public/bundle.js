@@ -19842,6 +19842,7 @@
 	      activeChannel: '',
 	      messages: []
 	    };
+	    _this.onMessageSend = _this.onMessageSend.bind(_this);
 	    return _this;
 	  }
 
@@ -19862,13 +19863,23 @@
 	      });
 
 	      this.connection = new WebSocket('ws://localhost:3000/channel');
-	      this.connection.onopen = function (message) {
-	        //console.log('connected to channel');
-	        _this2.connection.send(JSON.stringify({ event: 'ping', some: 'data' }));
-	      };
 	      this.connection.onmessage = function (message) {
-	        //console.log('message', JSON.parse(message.data));
+	        // Find chat and add new message
+	        console.log('WTF');
+	        console.log('message', JSON.parse(message.data));
+	        debugger;
 	      };
+	    }
+	  }, {
+	    key: 'onMessageSend',
+	    value: function onMessageSend(message_content) {
+	      // trigger message send via websocket
+	      this.connection.send(JSON.stringify({
+	        event: 'new_message',
+	        content: message_content,
+	        user: this.state.activeUser,
+	        channel: this.state.activeChannel
+	      }));
 	    }
 	  }, {
 	    key: 'onChannelSelect',
@@ -19913,7 +19924,10 @@
 	            { className: 'w-100 h-100 scrollable' },
 	            _react2.default.createElement(_message_feed2.default, { messages: this.state.messages })
 	          ),
-	          _react2.default.createElement(_chat_box2.default, null)
+	          _react2.default.createElement(_chat_box2.default, {
+	            onMessageSend: function onMessageSend(e) {
+	              return _this4.onMessageSend(e);
+	            } })
 	        )
 	      );
 	    }
@@ -21501,18 +21515,9 @@
 	  });
 
 	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Channels'
-	    ),
-	    _react2.default.createElement(
-	      'ul',
-	      { className: 'list-group scrollable h-100' },
-	      channels
-	    )
+	    'ul',
+	    { className: 'list-group scrollable h-100' },
+	    channels
 	  );
 	};
 
@@ -21557,7 +21562,7 @@
 /* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21585,51 +21590,59 @@
 
 	    var _this = _possibleConstructorReturn(this, (ChatBox.__proto__ || Object.getPrototypeOf(ChatBox)).call(this, props));
 
-	    _this.state = { message_length: 0 };
+	    _this.state = {
+	      message_length: 0,
+	      message_content: ''
+	    };
+	    _this.onEnterPress = _this.onEnterPress.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(ChatBox, [{
-	    key: "onInputChange",
+	    key: 'onInputChange',
 	    value: function onInputChange(e) {
-	      this.setState({ message_length: e.target.value.length });
+	      this.setState({
+	        message_length: e.target.value.length,
+	        message_content: e.target.value
+	      });
 	    }
 	  }, {
-	    key: "onEnterPress",
+	    key: 'onEnterPress',
 	    value: function onEnterPress(e) {
 	      if (e.keyCode == 13 && e.shiftKey == false) {
 	        e.preventDefault();
-	        // trigger message send via websocket
-	        // clear message box if successful
-	        // check that state.message_length changed to 0 after success
-	        console.log("ENTER PRESSED!");
+	        this.setState({
+	          message_content: '',
+	          message_length: 0
+	        });
+	        this.props.onMessageSend(e.target.value);
 	      }
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "w-100 chat-box" },
+	        'div',
+	        { className: 'w-100 chat-box' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "form-group" },
-	          _react2.default.createElement("input", {
-	            type: "text",
-	            className: "form-control form-control-lg",
-	            placeholder: "Type your message here and press 'Enter'",
-	            value: this.state.message,
+	          'div',
+	          { className: 'form-group' },
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            className: 'form-control form-control-lg',
+	            placeholder: 'Type your message here and press \'Enter\'',
+	            value: this.state.message_content,
 	            onKeyDown: this.onEnterPress,
 	            onChange: function onChange(e) {
 	              return _this2.onInputChange(e);
 	            } }),
 	          _react2.default.createElement(
-	            "small",
+	            'small',
 	            {
-	              id: "character-counter",
-	              className: "form-text text-muted" },
+	              id: 'character-counter',
+	              className: 'form-text text-muted' },
 	            this.state.message_length + " / 255 characters"
 	          )
 	        )

@@ -5,5 +5,13 @@ class Message < ActiveRecord::Base
   validates :content, presence: true
   validates :user_id, presence: true
   validates :channel_id, presence: true
+
+  def in_json_response_format
+    {
+      content: content,
+      user: user.screen_name,
+      channel: channel.name
+    }.to_json
+  end
 end
 

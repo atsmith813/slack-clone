@@ -15,6 +15,7 @@ class Chats extends Component {
       activeChannel: '',
       messages: []
     };
+    this.onMessageSend = this.onMessageSend.bind(this);
   }
 
   componentDidMount() {
@@ -32,13 +33,20 @@ class Chats extends Component {
       });
 
     this.connection = new WebSocket('ws://localhost:3000/channel');
-    this.connection.onopen = (message) => {
-      //console.log('connected to channel');
-      this.connection.send(JSON.stringify({ event: 'ping', some: 'data' }));
-    }
     this.connection.onmessage = (message) => {
-      //console.log('message', JSON.parse(message.data));
+      // Find chat and add new message
+      console.log('message', JSON.parse(message.data));
     }
+  }
+
+  onMessageSend(message_content) {
+    // trigger message send via websocket
+    this.connection.send(JSON.stringify({
+      event: 'new_message',
+      content: message_content,
+      user: this.state.activeUser,
+      channel: this.state.activeChannel
+    }));
   }
 
   onChannelSelect(activeChannel) {
@@ -69,7 +77,8 @@ class Chats extends Component {
           <div className="w-100 h-100 scrollable">
             <MessageFeed messages={ this.state.messages } />
           </div>
-          <ChatBox />
+          <ChatBox
+            onMessageSend={ e => this.onMessageSend(e) } />
         </div>
       </div>
     );

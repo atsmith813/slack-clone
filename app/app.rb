@@ -10,9 +10,15 @@ module SlackClone
 	  sprockets :minify => (Padrino.env == :production)
 
 		websocket :channel do
-			on :ping do |message|
-				send_message(:channel, session['websocket_user'], {pong: true, data: message})
-				broadcast(:channel, {pong: true, data: message, broadcast: true})
+			on :new_message do |new_message|
+        current_user = User.find_or_create_by screen_name: new_message['user']
+        channel = Channel.find_by(name: new_message['channel'])
+        message = Message.create(
+          user: current_user,
+          channel: channel,
+          content: new_message['content']
+        )
+        broadcast(:channel, message.in_json_response_format)
 			end
 		end
 
