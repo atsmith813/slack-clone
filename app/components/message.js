@@ -8,7 +8,7 @@ const Message = ({ message }) => {
       <div className="screen_name d-inline">
         { screen_name + ':' }
       </div>
-      <div className="message_content">
+      <div className="message_content d-inline">
         { message_content }
       </div>
     </li>

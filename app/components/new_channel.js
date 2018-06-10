@@ -10,19 +10,20 @@ class NewChannel extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleScreenNameChange(e) {
-    this.setState({ screenName: e.target.value });
+  handleChannelNameChange(e) {
+    this.setState({ newChannel: e.target.value });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/home', {screenName: this.state.screenName}, PostHeaders)
+    axios.post('/channels', { newChannel: this.state.newChannel}, PostHeaders)
       .then(function (response) {
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-    this.props.onScreenNameSelect(this.state.screenName);
+    this.props.addNewChannel(this.state.newChannel);
   }
 
   render() {
@@ -36,11 +37,11 @@ class NewChannel extends Component {
                   type="text"
                   className="text-center form-control form-control-lg"
                   id="selectScreenName"
-                  placeholder="Enter your screen name here"
-                  value={ this.state.screenName }
-                  onChange={ e => this.handleScreenNameChange(e) } />
+                  placeholder="Enter new channel name here"
+                  value={ this.state.newChannel }
+                  onChange={ e => this.handleChannelNameChange(e) } />
               </div>
-              <SubmitBtn btn_text="Connect" />
+              <SubmitBtn btn_text="Create Channel" />
             </form>
           </div>
         </div>
@@ -49,5 +50,5 @@ class NewChannel extends Component {
   }
 }
 
-export default ChooseScreenName;
+export default NewChannel;
 
