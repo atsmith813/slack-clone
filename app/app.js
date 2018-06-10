@@ -28,7 +28,10 @@ class App extends Component {
   }
 
   addNewChannel(newChannel) {
-    this.setState({ newChannel: false });
+    this.setState({
+      activeChannel: newChannel,
+      newChannel: false
+    });
   }
 
   render() {

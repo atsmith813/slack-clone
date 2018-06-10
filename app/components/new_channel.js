@@ -18,12 +18,11 @@ class NewChannel extends Component {
     e.preventDefault();
     axios.post('/channels', { newChannel: this.state.newChannel}, PostHeaders)
       .then(function (response) {
-        console.log(response);
-      })
+        this.props.addNewChannel(this.state.newChannel);
+      }.bind(this))
       .catch(function (error) {
         console.log(error);
       });
-    this.props.addNewChannel(this.state.newChannel);
   }
 
   render() {
