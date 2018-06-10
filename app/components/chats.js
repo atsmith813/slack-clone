@@ -84,10 +84,8 @@ class Chats extends Component {
             activeChannel={ this.props.activeChannel } />
         </div>
         <div className="col-md-9 h-100">
-          <div className="w-100 h-100 scrollable">
-            <h1 className="active-channel-title">{ this.props.activeChannel }</h1>
-            <MessageFeed messages={ this.state.messages } />
-          </div>
+          <h1 className="active-channel-title">{ this.props.activeChannel }</h1>
+          <MessageFeed messages={ this.state.messages } />
           <ChatBox onMessageSend={ e => this.onMessageSend(e) } />
         </div>
       </div>
