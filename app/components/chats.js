@@ -38,7 +38,7 @@ class Chats extends Component {
       const newMessageChannel = newMessageData.channel;
       if (this.state.activeChannel === newMessageChannel) {
         const messages = Array.from(this.state.messages);
-        messages.push(newMessageData.new_message);
+        messages.unshift(newMessageData.new_message);
         this.setState({
           messages: messages,
           activeChannel: newMessageChannel
