@@ -63,7 +63,13 @@ body {
 }
 
 .channel-title {
+  vertical-align: middle;
   margin-left: 15px;
+}
+
+.create-channel-btn {
+  margin-top: 0.3rem;
+  margin-right: 15px !important;
 }
 
 .channel-list,
