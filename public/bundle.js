@@ -19865,19 +19865,20 @@
 	      this.connection = new WebSocket('ws://localhost:3000/channel');
 	      this.connection.onmessage = function (message) {
 	        var newMessageData = JSON.parse(message.data);
-	        //if (this.state.activeChannel === newMessageData.channel) {
-	        var messages = Array.from(_this2.state.messages);
-	        messages.push(newMessageData.new_message);
-	        _this2.setState({
-	          messages: messages
-	        });
-	        //}
+	        var newMessageChannel = newMessageData.channel;
+	        if (_this2.state.activeChannel === newMessageChannel) {
+	          var messages = Array.from(_this2.state.messages);
+	          messages.push(newMessageData.new_message);
+	          _this2.setState({
+	            messages: messages,
+	            activeChannel: newMessageChannel
+	          });
+	        }
 	      };
 	    }
 	  }, {
 	    key: 'onMessageSend',
 	    value: function onMessageSend(message_content) {
-	      // trigger message send via websocket
 	      this.connection.send(JSON.stringify({
 	        event: 'new_message',
 	        content: message_content,
