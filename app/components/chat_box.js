@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 class ChatBox extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       message_length: 0,
       message_content: ''
     };
+
     this.onEnterPress = this.onEnterPress.bind(this);
   }
 
@@ -48,7 +50,6 @@ class ChatBox extends Component {
       </div>
     );
   }
-
 }
 
 export default ChatBox;

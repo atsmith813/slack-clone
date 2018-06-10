@@ -6,7 +6,9 @@ import PostHeaders from './post_headers';
 class NewChannel extends Component {
   constructor(props) {
     super(props);
+
     this.state = { newChannel: '' };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 

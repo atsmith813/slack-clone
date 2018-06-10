@@ -12,16 +12,6 @@
 
 ActiveRecord::Schema.define(version: 4) do
 
-  create_table "accounts", force: :cascade do |t|
-    t.string "name"
-    t.string "surname"
-    t.string "email"
-    t.string "crypted_password"
-    t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "channels", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false

@@ -7,7 +7,9 @@ import Chats from './chats';
 class ChooseScreenName extends Component {
   constructor(props) {
     super(props);
+
     this.state = { screenName: '' };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 

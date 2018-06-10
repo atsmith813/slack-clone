@@ -14,7 +14,9 @@ class Chats extends Component {
       messages: [],
       new_channel: false
     };
+
     this.onMessageSend = this.onMessageSend.bind(this);
+    this.setWebSocket = this.setWebSocket.bind(this);
   }
 
   componentDidMount() {
@@ -26,14 +28,16 @@ class Chats extends Component {
           channels: channels,
           activeChannel: activeChannel
         });
-
         this.getMessages(activeChannel);
         this.props.setActiveChannel(activeChannel);
       })
       .catch((error) => {
         console.log(error);
       });
+    this.setWebSocket();
+  }
 
+  setWebSocket() {
     this.connection = new WebSocket('ws://localhost:3000/channel');
     this.connection.onmessage = (message) => {
       const newMessageData = JSON.parse(message.data);
@@ -74,7 +78,7 @@ class Chats extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="chat row h-100 w-100">
         <div className="col-md-3 h-100 channel-column">
           <ChannelTitle renderNewChannel={ this.props.renderNewChannel() }/>
@@ -84,7 +88,7 @@ class Chats extends Component {
             activeChannel={ this.props.activeChannel } />
         </div>
         <div className="col-md-9 h-100">
-          <h1 className="active-channel-title">{ this.props.activeChannel }</h1>
+          <h1 className="active-channel-title">{ '# ' + this.props.activeChannel }</h1>
           <MessageFeed messages={ this.state.messages } />
           <ChatBox onMessageSend={ e => this.onMessageSend(e) } />
         </div>

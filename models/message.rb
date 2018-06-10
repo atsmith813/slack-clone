@@ -8,10 +8,10 @@ class Message < ActiveRecord::Base
 
   def in_json_response_format
     {
-      "content" => content,
-      "user" => user.screen_name,
-      "channel" => channel.name,
-      "new_message" => [user.screen_name, content]
+      'content' => content,
+      'user' => user.screen_name,
+      'channel' => channel.name,
+      'new_message' => [user.screen_name, content]
     }
   end
 end
