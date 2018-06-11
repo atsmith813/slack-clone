@@ -4,6 +4,7 @@ import ChannelList from './channel_list';
 import ChatBox from './chat_box';
 import MessageFeed from './message_feed';
 import ChannelTitle from './channel_title';
+import ScreenNameTitle from './screen_name_title';
 
 class Chats extends Component {
   constructor(props) {
@@ -38,7 +39,8 @@ class Chats extends Component {
   }
 
   setWebSocket() {
-    this.connection = new WebSocket('wss://' + window.location.host + '/channel');
+    const webSocketProtocol = window.location.host === '127.0.0.1:3000' ? 'ws://' : 'wss://'
+    this.connection = new WebSocket(webSocketProtocol + window.location.host + '/channel');
     this.connection.onmessage = (message) => {
       const newMessageData = JSON.parse(message.data);
       const newMessageChannel = newMessageData.channel;
@@ -88,11 +90,16 @@ class Chats extends Component {
             activeChannel={ this.props.activeChannel } />
         </div>
         <div className="col-md-9 h-100">
-          <h1 className="active-channel-title">{ '# ' + this.props.activeChannel }</h1>
+          <h1 className="active-channel-title d-inline">{ '# ' + this.props.activeChannel }</h1>
+          <ScreenNameTitle
+            onScreenNameChange={ this.props.onScreenNameChange }
+            activeUser={ this.props.activeUser } />
           <MessageFeed
             messages={ this.state.messages }
-            activeUser={ this.props.activeUser }/>
-          <ChatBox onMessageSend={ e => this.onMessageSend(e) } />
+            activeUser={ this.props.activeUser } />
+          <ChatBox
+            onMessageSend={ e => this.onMessageSend(e) }
+            activeUser={ this.props.activeUser } />
         </div>
       </div>
     );

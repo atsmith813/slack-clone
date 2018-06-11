@@ -68,8 +68,17 @@
   max-height: 10%;
 }
 
+.user-icon {
+  margin-right: 1rem;
+}
+
 .own-message {
   color: #3399f3;
+}
+
+.change-screen-name-btn {
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
 }
 
 .create-channel-btn {

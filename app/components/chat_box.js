@@ -22,11 +22,14 @@ class ChatBox extends Component {
   onEnterPress(e) {
     if (e.keyCode == 13 && e.shiftKey == false) {
       e.preventDefault();
-      this.setState({
-        message_content: '',
-        message_length: 0
-      });
-      this.props.onMessageSend(e.target.value);
+      const message_content = e.target.value;
+      if (message_content.length) {
+        this.setState({
+          message_content: '',
+          message_length: 0
+        });
+        this.props.onMessageSend(e.target.value);
+      }
     }
   }
 
@@ -37,7 +40,7 @@ class ChatBox extends Component {
           <input
             type="text"
             className="form-control form-control-lg"
-            placeholder="Type your message here and press 'Enter'"
+            placeholder={ "Hey, " + this.props.activeUser + "! Type your message here and press 'Enter'" }
             value={ this.state.message_content }
             onKeyDown={ this.onEnterPress }
             onChange={ e => this.onInputChange(e) } />

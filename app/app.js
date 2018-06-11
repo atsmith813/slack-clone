@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeUser: '',
+      activeUser: localStorage.getItem('screenName'),
       newChannel: false,
       channelAdded: false,
       activeChannel: ''
@@ -22,7 +22,13 @@ class App extends Component {
     this.setState({ activeChannel });
   }
 
+  onScreenNameChange() {
+    localStorage.removeItem('screenName');
+    this.setState({ activeUser: '' });
+  }
+
   onScreenNameSelect(screenName) {
+    localStorage.setItem('screenName', screenName);
     this.setState({ activeUser: screenName });
   }
 
@@ -47,6 +53,7 @@ class App extends Component {
     } else if (this.state.activeUser) {
       return (
         <Chats
+          onScreenNameChange={ () => this.onScreenNameChange() }
           setActiveChannel={ activeChannel => this.setActiveChannel(activeChannel) }
           activeChannel={ this.state.activeChannel }
           activeUser={ this.state.activeUser }
