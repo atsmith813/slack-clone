@@ -17,8 +17,8 @@ gem 'pry'
 gem 'puma'
 gem 'rake'
 gem 'sass'
-gem 'uglifier', '2.1.1'
-gem 'yui-compressor', '0.9.6'
+gem 'uglifier'
+gem 'yui-compressor'
 
 group :production do
   gem 'pg'

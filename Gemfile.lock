@@ -164,8 +164,8 @@ DEPENDENCIES
   rspec
   sass
   sqlite3
-  uglifier (= 2.1.1)
-  yui-compressor (= 0.9.6)
+  uglifier
+  yui-compressor
 
 BUNDLED WITH
    1.16.1
