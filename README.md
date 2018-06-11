@@ -16,7 +16,7 @@ that is a distant relative of IRC and Slack!
 ## How it works
 First, you choose a screen name
 
-![alt text](https://hirealexsmith.com/chats.png "Choose screen name")
+![alt text](https://hirealexsmith.com/chooseScreenName.png "Choose screen name")
 
 Here you can join the list of available channels on the left
 
