@@ -15,11 +15,18 @@ gem 'padrino-sprockets', require: 'padrino/sprockets'
 gem 'padrino-websockets'
 gem 'pry'
 gem 'puma'
-gem 'rack-test', require: 'rack/test', group: 'test'
 gem 'rake'
-gem 'rspec', group: 'test'
 gem 'sass'
-gem 'sqlite3'
 gem 'uglifier', '2.1.1'
 gem 'yui-compressor', '0.9.6'
+
+group :production do
+  gem 'pg'
+end
+
+group :development do
+  gem 'rack-test', require: 'rack/test', group: 'test'
+  gem 'rspec', group: 'test'
+  gem 'sqlite3'
+end
 
