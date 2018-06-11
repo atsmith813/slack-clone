@@ -1,13 +1,7 @@
-$light-grey-background: #f7f7f9;
-$light-grey-border: rgba(0, 0, 0, 0.125);
-$own-message-color: #3399F3;
-
-#app,
-html,
-body {
-  width:100%;
-  margin:0;
-  height:100%;
+#app, html, body {
+  width: 100%;
+  margin: 0;
+  height: 100%;
 }
 
 .list-group-item {
@@ -20,9 +14,10 @@ body {
 .scrollable {
   overflow-y: hidden;
   padding: 0;
-  &:hover, &:focus {
-    overflow-y: auto;
-  }
+}
+
+.scrollable:hover, .scrollable:focus {
+  overflow-y: auto;
 }
 
 .chat-box {
@@ -53,10 +48,10 @@ body {
 }
 
 .channel-column {
-  background-color: $light-grey-background;
+  background-color: #f7f7f9;
   padding: 0;
   border-right: solid 1.5px;
-  border-right-color: $light-grey-border;
+  border-right-color: rgba(0, 0, 0, 0.125);
 }
 
 .channel-list {
@@ -74,7 +69,7 @@ body {
 }
 
 .own-message {
-  color: $own-message-color;
+  color: #3399f3;
 }
 
 .create-channel-btn {
@@ -82,9 +77,8 @@ body {
   margin-right: 15px !important;
 }
 
-.channel-list,
-.channel{
-  background-color: $light-grey-background;
+.channel-list, .channel {
+  background-color: #f7f7f9;
 }
 
 h1 {
