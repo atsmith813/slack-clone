@@ -1,5 +1,6 @@
 $light-grey-background: #f7f7f9;
 $light-grey-border: rgba(0, 0, 0, 0.125);
+$own-message-color: #3399F3;
 
 #app,
 html,
@@ -72,6 +73,10 @@ body {
   max-height: 10%;
 }
 
+.own-message {
+  color: $own-message-color;
+}
+
 .create-channel-btn {
   margin-top: 0.3rem;
   margin-right: 15px !important;
@@ -91,3 +96,4 @@ h1 {
     max-height: 60%;
   }
 }
+

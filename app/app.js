@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeUser: sessionStorage.getItem('screenName'),
+      activeUser: '',
       newChannel: false,
       channelAdded: false,
       activeChannel: ''

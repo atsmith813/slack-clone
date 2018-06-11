@@ -6,6 +6,7 @@ const MessageFeed = (props) => {
   const formatted_messages = messages_array.map((message, index) => {
     return (
       <Message
+        activeUser={ props.activeUser }
         message={ message }
         key={ 'message_' + index }/>
     );

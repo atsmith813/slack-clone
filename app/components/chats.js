@@ -89,7 +89,9 @@ class Chats extends Component {
         </div>
         <div className="col-md-9 h-100">
           <h1 className="active-channel-title">{ '# ' + this.props.activeChannel }</h1>
-          <MessageFeed messages={ this.state.messages } />
+          <MessageFeed
+            messages={ this.state.messages }
+            activeUser={ this.props.activeUser }/>
           <ChatBox onMessageSend={ e => this.onMessageSend(e) } />
         </div>
       </div>
