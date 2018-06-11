@@ -15,7 +15,7 @@ const ScreenNameTitle = (props) => {
       <h1 className="own-message d-inline">{ props.activeUser }</h1>
       <button
         type="button"
-        className="change-screen-name-btn btn btn-success d-inline"
+        className="change-screen-name-btn btn btn-secondary d-inline"
         onClick={ e => handleOnClick(e) } >
         Change Screen Name
       </button>
