@@ -20,9 +20,12 @@ ActiveRecord::Base.configurations[:development] = {
 }
 
 ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'slack_clone_production.db')
-
+  :adapter  => 'postgresql',
+  :database => ENV['DATABASE_NAME'],
+  :username => ENV['DATABASE_URL'],
+  :password => ENV['DATABASE_PASSWORD'],
+  :host     => ENV['DATABASE_HOST'],
+  :port     => ENV['DATABASE_PORT']
 }
 
 ActiveRecord::Base.configurations[:test] = {
