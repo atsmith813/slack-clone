@@ -3,17 +3,21 @@ import React, { Component } from 'react';
 const Message = (props) => {
   const message = props.message;
   const activeUser = props.activeUser;
-  const screen_name = message[0];
-  const message_content = message[1];
-  const screenNameColor = screen_name === activeUser ? 'own-message' : '';
+  const screenName = message.screenName;
+  const messageContent = message.content;
+  const timestamp = message.timestamp;
+  const screenNameColor = screenName === activeUser ? 'own-message' : '';
 
   return (
     <li class_name="list-group-item">
       <div className={ "screen_name d-inline " + screenNameColor } >
-        { screen_name + ':' }
+        { screenName }
       </div>
-      <div className="message_content d-inline">
-        { message_content }
+      <div className={ "timestamp  d-inline" } >
+        { timestamp }
+      </div>
+      <div className="message_content">
+        { messageContent }
       </div>
     </li>
   );

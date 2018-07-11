@@ -86,8 +86,38 @@
   margin-right: 15px !important;
 }
 
+.message_date {
+  overflow: hidden;
+  margin: 1rem 0;
+  text-align: center;
+  color: #2d2d2d;
+}
+.message_date:before,
+.message_date:after {
+  background-color: #7777773b;
+  content: '';
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.message_date:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.message_date:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
 .channel-list, .channel {
   background-color: #f7f7f9;
+}
+
+.message_content {
+  margin-bottom: 0.5rem;
+  color: #2d2d2d;
 }
 
 h1 {

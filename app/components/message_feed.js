@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import Message from './message';
+import MessageDate from './message_date';
 
 const MessageFeed = (props) => {
-  const messages_array = Array.from(props.messages);
-  const formatted_messages = messages_array.map((message, index) => {
+  const messagesByDate = props.messages;
+  const messageDates = Object.keys(messagesByDate).map((date, index) => {
     return (
-      <Message
+      <MessageDate
+        date={ date }
+        messages={ messagesByDate[date] }
         activeUser={ props.activeUser }
-        message={ message }
-        key={ 'message_' + index }/>
+        key={ 'date_' + index }/>
     );
   });
 
   return (
-    <ul className ="list-group message-feed scrollable">
-      { formatted_messages }
-    </ul>
+    <div className ="message-feed scrollable w-100">
+      { messageDates }
+    </div>
   );
 }
 

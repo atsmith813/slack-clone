@@ -45,12 +45,10 @@ class Chats extends Component {
       const newMessageData = JSON.parse(message.data);
       const newMessageChannel = newMessageData.channel;
       if (this.props.activeChannel === newMessageChannel) {
-        const messages = Array.from(this.state.messages);
-        messages.unshift(newMessageData.new_message);
         this.setState({
-          messages: messages,
           activeChannel: newMessageChannel
         });
+        this.getMessages(newMessageChannel);
       }
     }
   }

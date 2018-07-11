@@ -10,8 +10,15 @@ class Message < ActiveRecord::Base
     {
       'content' => content,
       'user' => user.screen_name,
-      'channel' => channel.name,
-      'new_message' => [user.screen_name, content]
+      'channel' => channel.name
+    }
+  end
+
+  def in_message_index_response_format
+    {
+      'screenName' => user.screen_name,
+      'content' => content,
+      'timestamp' => (created_at - 4.hours).strftime('%l:%M %P')
     }
   end
 end

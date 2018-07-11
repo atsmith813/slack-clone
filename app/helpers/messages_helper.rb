@@ -3,11 +3,25 @@
 module SlackClone
   class App
     module MessagesHelper
-      # def simple_helper_method
-      # ...
-      # end
+      def ordinalize number
+        abs_number = number.to_i.abs
+        if (11..13).include?(abs_number % 100)
+          ordinal = 'th'
+        else
+          case abs_number % 10
+          when 1
+            ordinal = 'st'
+          when 2
+            ordinal = 'nd'
+          when 3
+            ordinal = 'rd'
+          else
+            ordinal = 'th'
+          end
+        end
+        "#{number}#{ordinal}"
+      end
     end
-
     helpers MessagesHelper
   end
 end
